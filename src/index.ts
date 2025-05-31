@@ -1,8 +1,8 @@
-import express from 'express';
+import app from "./app.js";
+import { connectToDB } from "./db/connection.js";
 
-const app = express()
 const PORT = 5000
 
-app.use(express.json())
-
-app.listen(PORT, ()=> console.log(`Express server running at ${PORT}`))
+connectToDB().then(()=>{
+    app.listen(PORT, ()=> console.log(`Express server running at ${PORT} and DB connected`))  
+}).catch(err => console.log(err))
